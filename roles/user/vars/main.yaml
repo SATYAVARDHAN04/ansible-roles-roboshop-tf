@@ -1,0 +1,2 @@
+REDIS_HOST: redis.satyology.site
+MONGO_HOST: mongodb.satyology.site

@@ -1,0 +1,5 @@
+CATALOGUE_HOST: catalogue.satyology.site
+USER_HOST: user.satyology.site
+CART_HOST: cart.satyology.site
+SHIPPING_HOST: shipping.satyology.site
+PAYMENT_HOST: payment.satyology.site

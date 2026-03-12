@@ -1,0 +1,22 @@
+- name: Installing mysql
+  ansible.builtin.dnf:
+    name: mysql-server
+    state: present
+
+- name: Enabling and Starting mysql
+  ansible.builtin.service:
+    name: mysqld
+    state: started
+    enabled: yes
+
+# THIS INSTALLATION SHOULD BE DONE IN ANSIBLE CONTROL SERVER AND NOT MYSQL SERVER SINCE ANSIBLE CONTROL SERVER IS PULLING FROM SSM STORE
+- name: Installing packages required for ansible (python) to connect with AWS SSM PARAMETER STORE
+  ansible.builtin.pip:
+    name: "{{ item }}"
+    executable: pip3
+  loop:
+    - boto3
+    - botocore
+
+- name: Set mysql root password
+  ansible.builtin.shell: mysql_secure_installation --set-root-pass {{ MYSQL_ROOT_PASSWORD }}

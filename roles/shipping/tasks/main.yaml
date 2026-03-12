@@ -1,0 +1,29 @@
+- name: app-setup
+  include_role:
+    name: common
+    tasks_from: app-setup.yaml
+
+- name: installing maven
+  include_role:
+    name: common
+    tasks_from: maven.yaml
+
+- name: import data into mysql
+  tags:
+    - import
+  community.mysql.mysql_db:
+    name: all
+    login_user: "{{ MYSQL_ROOT_USER }}"
+    login_password: "{{ MYSQL_ROOT_PASSWORD }}"
+    login_host: "{{ MYSQL_HOST }}"
+    state: import
+    target: "{{ item }}"
+  loop:
+    - /app/db/schema.sql
+    - /app/db/app-user.sql
+    - /app/db/master-data.sql
+
+- name: Setting systemd service
+  include_role:
+    name: common
+    tasks_from: systemd.yaml

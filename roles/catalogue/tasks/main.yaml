@@ -1,0 +1,45 @@
+- name: app setup
+  include_role:
+    name: common
+    tasks_from: app-setup.yaml
+
+- name: nodejs setup
+  include_role:
+    name: common
+    tasks_from: nodejs.yaml
+
+- name: systemd setup
+  include_role:
+    name: common
+    tasks_from: systemd.yaml
+
+- name: Copying mongodb repo file
+  ansible.builtin.copy:
+    src: mongodb.repo
+    dest: /etc/yum.repos.d/mongodb.repo
+
+- name: Installing mongodb client
+  ansible.builtin.dnf:
+    name: mongodb-mongosh
+    state: present
+
+- name: Check products are loaded or not
+  ansible.builtin.shell: mongosh --host mongodb.satyology.site --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
+  args:
+    chdir: /app
+  register: result
+
+- name: print catalogue output
+  ansible.builtin.debug:
+    msg: "{{ result.stdout }}"
+
+- name: importing data
+  ansible.builtin.shell: mongosh --host mongodb.satyology.site </app/db/master-data.js
+  args:
+    chdir: /app
+  when: result.stdout == "-1"
+
+- name: systemd setup
+  include_role:
+    name: common
+    tasks_from: systemd.yaml

@@ -1,0 +1,7 @@
+- name: Configuring "{{ component }}"
+  # hosts: "{{ component }}"
+  hosts: localhost #only for terraform purpose 
+  connection: local #only for terraform purpose
+  become: yes
+  roles: #this will automatically load a folder called roles in the current working directory and look for a folder with the same name as the component
+    - "{{ component }}"
