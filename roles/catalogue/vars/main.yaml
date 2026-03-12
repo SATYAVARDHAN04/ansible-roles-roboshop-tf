@@ -1,1 +1,1 @@
-MONGODB_HOST: mongodb.satyology.site
+MONGODB_HOST: mongodb-{{ env }}.satyology.site

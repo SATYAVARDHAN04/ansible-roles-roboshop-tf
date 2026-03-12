@@ -24,7 +24,7 @@
     state: present
 
 - name: Check products are loaded or not
-  ansible.builtin.shell: mongosh --host mongodb.satyology.site --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
+  ansible.builtin.shell: mongosh --host {{ MONGODB_HOST }} --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
   args:
     chdir: /app
   register: result
@@ -34,7 +34,7 @@
     msg: "{{ result.stdout }}"
 
 - name: importing data
-  ansible.builtin.shell: mongosh --host mongodb.satyology.site </app/db/master-data.js
+  ansible.builtin.shell: mongosh --host {{ MONGODB_HOST }} </app/db/master-data.js
   args:
     chdir: /app
   when: result.stdout == "-1"
