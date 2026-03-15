@@ -1,2 +1,2 @@
-REDIS_HOST: redis.satyology.site
-MONGO_HOST: mongodb.satyology.site
+REDIS_HOST: redis-{{ env }}.satyology.site
+MONGO_HOST: mongodb-{{ env }}.satyology.site

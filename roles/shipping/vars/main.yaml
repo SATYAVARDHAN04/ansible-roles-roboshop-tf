@@ -1,4 +1,4 @@
-CART_HOST: cart.satyology.site
-MYSQL_HOST: mysql.satyology.site
+CART_HOST: cart.backend-{{ env }}.satyology.site
+MYSQL_HOST: mysql.{{ env }}.satyology.site
 MYSQL_ROOT_USER: root
 MYSQL_ROOT_PASSWORD: RoboShop@1

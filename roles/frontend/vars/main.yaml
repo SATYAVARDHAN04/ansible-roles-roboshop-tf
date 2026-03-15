@@ -1,5 +1,5 @@
-CATALOGUE_HOST: catalogue.satyology.site
-USER_HOST: user.satyology.site
-CART_HOST: cart.satyology.site
-SHIPPING_HOST: shipping.satyology.site
-PAYMENT_HOST: payment.satyology.site
+CATALOGUE_HOST: catalogue.backend-{{ env }}.satyology.site
+USER_HOST: user.backend-{{ env }}.satyology.site
+CART_HOST: cart.backend-{{ env }}.satyology.site
+SHIPPING_HOST: shipping.backend-{{ env }}.satyology.site
+PAYMENT_HOST: payment.backend-{{ env }}.satyology.site

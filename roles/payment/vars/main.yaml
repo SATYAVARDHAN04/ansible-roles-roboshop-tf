@@ -1,7 +1,7 @@
-CART_HOST: cart.satyology.site
-CART_PORT: 8080
-USER_HOST: user.satyology.site
-USER_PORT: 8080
-AMQP_HOST: rabbitmq.satyology.site
+CART_HOST: cart.backend-{{ env }}.satyology.site
+CART_PORT: 80 # payment call cart via load balancer so 80 instead of 8080
+USER_HOST: user.backend-{{ env }}.satyology.site
+USER_PORT: 80 # payment call user via load balancer so 80 instead of 8080
+AMQP_HOST: rabbitmq.{{ env }}.satyology.site
 AMQP_USER: roboshop
 AMQP_PASS: roboshop123
